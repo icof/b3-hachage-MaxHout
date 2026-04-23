@@ -84,14 +84,24 @@ include "header.php";
 		$adresse = htmlspecialchars($_POST['adresse']);
 	}
 	if (isset($_POST['motDePasse']) && $_POST['motDePasse'] != "") {
-		$motDePasse = htmlspecialchars($_POST['motDePasse']);
+		$motDePasse = $_POST['motDePasse'];
 		// Vérification de la contrainte Au moins 8 caractères, au moins 1 chiffre, au moins une majuscule et une minuscule.
 		if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $motDePasse)) {
 			$estValide = false;
 		}
+		
 	}
 	if (isset($_POST['confirmationMotDePasse']) && $_POST['confirmationMotDePasse'] != "") {
-		$confirmationMotDePasse = htmlspecialchars($_POST['confirmationMotDePasse']);
+		$confirmationMotDePasse = $_POST['confirmationMotDePasse'];
+
+		if ($motDePasse != $confirmationMotDePasse) {
+        $estValide = false;
+    }
+
+	if ($estValide){
+		$motDePasse=md5($motDePasse);
+	}
+		
 	}
 
 	if (isset($_POST['pays']) && $_POST['pays'] != "") {
