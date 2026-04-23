@@ -90,6 +90,7 @@ include "header.php";
 			$estValide = false;
 		}
 		
+		
 	}
 	if (isset($_POST['confirmationMotDePasse']) && $_POST['confirmationMotDePasse'] != "") {
 		$confirmationMotDePasse = $_POST['confirmationMotDePasse'];
@@ -99,7 +100,7 @@ include "header.php";
     }
 
 	if ($estValide){
-		$motDePasse=md5($motDePasse);
+		$motDePasse = password_hash($motDePasse, PASSWORD_BCRYPT);
 	}
 		
 	}
